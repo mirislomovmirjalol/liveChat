@@ -23,7 +23,8 @@ class CreateConversationsMessegesTable extends Migration
 
             $table->foreign('conversations_id')
                   ->references('id')
-                  ->on('conversations');
+                  ->on('conversations')
+                  ->onDelete('cascade');
         });
     }
 

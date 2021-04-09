@@ -29,11 +29,13 @@ class CreateConversationsTable extends Migration
 
             $table->foreign('website_id')
                   ->references('id')
-                  ->on('user_website');
+                  ->on('user_website')
+                  ->onDelete('cascade');
 
             $table->foreign('operator_id')
                   ->references('user_id')
-                  ->on('website_operators');
+                  ->on('website_operators')
+                  ->onDelete('cascade');
         });
     }
 

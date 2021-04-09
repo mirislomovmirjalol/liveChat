@@ -22,11 +22,13 @@ class CreateWebsiteOperatorsTable extends Migration
 
             $table->foreign('website_id')
                   ->references('id')
-                  ->on('user_website');
+                  ->on('user_website')
+                  ->onDelete('cascade');
 
             $table->foreign('user_id')
                   ->references('id')
-                  ->on('users');
+                  ->on('users')
+                  ->onDelete('cascade');
         });
     }
 
