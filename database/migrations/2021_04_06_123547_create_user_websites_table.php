@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserWebsiteTable extends Migration
+class CreateUserWebsitesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateUserWebsiteTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_website', function (Blueprint $table) {
+        Schema::create('user_websites', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('url');
@@ -33,6 +33,6 @@ class CreateUserWebsiteTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_website');
+        Schema::dropIfExists('user_websites');
     }
 }

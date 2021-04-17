@@ -21,14 +21,14 @@ class CreateWebsiteOperatorsTable extends Migration
 //            $table->enum('status', ['active', 'disabled']);
 
             $table->foreign('website_id')
-                  ->references('id')
-                  ->on('user_website')
-                  ->onDelete('cascade');
+                ->references('id')
+                ->on('user_websites')
+                ->onDelete('cascade');
 
             $table->foreign('user_id')
-                  ->references('id')
-                  ->on('users')
-                  ->onDelete('cascade');
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

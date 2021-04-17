@@ -29,7 +29,7 @@ class CreateConversationsTable extends Migration
 
             $table->foreign('website_id')
                   ->references('id')
-                  ->on('user_website')
+                  ->on('user_websites')
                   ->onDelete('cascade');
 
             $table->foreign('operator_id')
