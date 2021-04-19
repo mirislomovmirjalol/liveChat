@@ -40,8 +40,8 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function websites()
+    public function websiteOperator()
     {
-        return $this->hasMany(UserWebsite::class);
+        return $this->belongsTo('App\Models\WebsiteOperator', 'website_id');
     }
 }

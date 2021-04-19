@@ -9,7 +9,7 @@
                     <div class="col-10 col-lg-8 offset-lg-2 offset-1">
                         <div class="row">
                             <h3>
-                                Add New WebSite
+                                Edit WebSite
                             </h3>
                         </div>
                         <div class="form-group row">
@@ -39,7 +39,7 @@
 
                         <div class="row pt-4">
                             <button class="btn btn-primary">
-                                Add New WebSite
+                                Edit WebSite
                             </button>
                         </div>
                     </div>

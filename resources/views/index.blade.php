@@ -466,7 +466,7 @@
                                 <div class="portfolio-links">
                                     <a href="{{ asset('img/portfolio/portfolio-1.jpg') }}" data-gall="portfolioGallery"
                                        class="venobox" title="App 1"><i class="bx bx-plus"></i></a>
-                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    <a href="#" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -481,7 +481,7 @@
                                 <div class="portfolio-links">
                                     <a href="{{ asset('img/portfolio/portfolio-2.jpg') }}" data-gall="portfolioGallery"
                                        class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    <a href="#" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -496,7 +496,7 @@
                                 <div class="portfolio-links">
                                     <a href="{{ asset('img/portfolio/portfolio-3.jpg') }}" data-gall="portfolioGallery"
                                        class="venobox" title="App 2"><i class="bx bx-plus"></i></a>
-                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    <a href="#" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -511,7 +511,7 @@
                                 <div class="portfolio-links">
                                     <a href="{{ asset('img/portfolio/portfolio-4.jpg') }}" data-gall="portfolioGallery"
                                        class="venobox" title="Card 2"><i class="bx bx-plus"></i></a>
-                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    <a href="#" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -526,7 +526,7 @@
                                 <div class="portfolio-links">
                                     <a href="{{ asset('img/portfolio/portfolio-5.jpg')}}" data-gall="portfolioGallery"
                                        class="venobox" title="Web 2"><i class="bx bx-plus"></i></a>
-                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    <a href="#" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -541,7 +541,7 @@
                                 <div class="portfolio-links">
                                     <a href="{{ asset('img/portfolio/portfolio-6.jpg') }}" data-gall="portfolioGallery"
                                        class="venobox" title="App 3"><i class="bx bx-plus"></i></a>
-                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    <a href="#" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -556,7 +556,7 @@
                                 <div class="portfolio-links">
                                     <a href="{{ asset('img/portfolio/portfolio-7.jpg') }}" data-gall="portfolioGallery"
                                        class="venobox" title="Card 1"><i class="bx bx-plus"></i></a>
-                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    <a href="#" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -571,7 +571,7 @@
                                 <div class="portfolio-links">
                                     <a href="{{ asset('img/portfolio/portfolio-8.jpg') }}" data-gall="portfolioGallery"
                                        class="venobox" title="Card 3"><i class="bx bx-plus"></i></a>
-                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    <a href="#" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -586,7 +586,7 @@
                                 <div class="portfolio-links">
                                     <a href="{{ asset('img/portfolio/portfolio-9.jpg') }}" data-gall="portfolioGallery"
                                        class="venobox" title="Web 3"><i class="bx bx-plus"></i></a>
-                                    <a href="portfolio-details.html" title="More Details"><i class="bx bx-link"></i></a>
+                                    <a href="#" title="More Details"><i class="bx bx-link"></i></a>
                                 </div>
                             </div>
                         </div>
@@ -892,7 +892,7 @@
 
                     <div class="col-lg-8 mt-5 mt-lg-0">
 
-                        <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+                        <form action="#" method="post" role="form" class="php-email-form">
                             <div class="form-row">
                                 <div class="col-md-6 form-group">
                                     <input type="text" name="name" class="form-control" id="name"

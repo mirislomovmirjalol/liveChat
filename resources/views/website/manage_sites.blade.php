@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
-    <section id="hero" class="d-flex align-items-start">
+    <section id="hero" class="d-flex min-vh-100 align-items-start">
         <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
             <div class="row">
 
                 <div class="col-lg-3 my-3" data-aos="zoom-in"
                      data-aos-delay="200">
-                    <a href="#about" class="">
+                    <a href="{{ route('site.create') }}">
                         <div class="card-body d-flex h-100 justify-content-center align-items-center icon-box">
 
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"

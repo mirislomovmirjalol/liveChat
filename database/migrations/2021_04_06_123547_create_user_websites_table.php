@@ -18,7 +18,7 @@ class CreateUserWebsitesTable extends Migration
             $table->string('name');
             $table->string('url');
             $table->string('token');
-            $table->bigInteger('logo')->nullable();
+            $table->string('logo')->nullable();
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->text('welcome_text')->nullable();
