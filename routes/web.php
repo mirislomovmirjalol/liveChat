@@ -23,6 +23,6 @@ Auth::routes();
 
 Route::middleware('auth')->group(function () {
     Route::get('/manage_sites', [App\Http\Controllers\ManageSitesController::class, 'index'])->name('manage_sites');
-    Route::get('/manage_sites/create', [App\Http\Controllers\ManageSitesController::class, 'create'])->name('manage_sites');
+    Route::get('/manage_sites/create', [App\Http\Controllers\ManageSitesController::class, 'create'])->name('createSite');
 
 });
