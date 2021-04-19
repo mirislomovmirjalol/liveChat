@@ -31,8 +31,8 @@ class ManageSitesController extends Controller
     {
 
 
-        $this->validate($request,[
-           'name' => 'required|max:255',
+        $this->validate($request, [
+            'name' => 'required|max:255',
             'url' => 'required',
             'title' => '',
             'description' => '',
@@ -48,7 +48,7 @@ class ManageSitesController extends Controller
         $userwebsite->description = $request->description;
         $userwebsite->welcome_text = $request->welcome_text;
         $userwebsite->logo = $request->logo;
-        $userwebsite->token = uniqid().time().rand(0,1000);
+        $userwebsite->token = uniqid() . time() . rand(0, 1000);
 
         $userwebsite->save();
 
@@ -63,10 +63,23 @@ class ManageSitesController extends Controller
 
         return redirect('/manage_sites');
     }
-    public function edit()
+
+    public function edit(UserWebsite $website)
+    {
+        $user = Auth::user()->id;
+
+        $websites = WebsiteOperator::where("user_id", $user)->where("website_id", $website);
+
+        if ($websites){
+            return view('website.edit', compact('website'));
+        }
+        else{
+            return abort(404);
+        }
+    }
+
+    public function update(UserWebsite $website)
     {
 
-
-        return view('website.edit');
     }
 }

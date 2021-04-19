@@ -33,7 +33,7 @@
                                 <h6 class="card-subtitle mb-2 text-muted"><a href="#">{{ $website->website->url }}</a></h6>
                                 <p class="card-text">{{ $website->website->description }}</p>
                                 <div class="d-flex justify-content-end">
-                                    <a href="#" class="card-link">Edit</a>
+                                    <a href="{{ route('site.edit', $website->website) }}" class="card-link">Edit</a>
                                 </div>
                             </div>
                         </div>

@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/manage_sites', [App\Http\Controllers\ManageSitesController::class, 'index'])->name('manage_sites');
     Route::get('/manage_sites/create', [App\Http\Controllers\ManageSitesController::class, 'create'])->name('site.create');
     Route::post('/manage_sites', [App\Http\Controllers\ManageSitesController::class, 'store']);
-    Route::get('/manage_sites/site/{id}', [App\Http\Controllers\ManageSitesController::class, 'edit'])->name('site.edit');
+    Route::get('/manage_sites/site/{website}', [App\Http\Controllers\ManageSitesController::class, 'edit'])->name('site.edit');
+    Route::patch('/manage_sites/site/{website}', [App\Http\Controllers\ManageSitesController::class, 'update'])->name('site.update');
 
 });
