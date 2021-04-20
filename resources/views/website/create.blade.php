@@ -22,7 +22,7 @@
                                    value="{{ old('url') }}" autocomplete="caption" autofocus>
 
                             <label for="title" class="col-md-4 col-form-label">Title</label>
-                            <input id="title" type="text" class="form-control" name="title"
+                            <input id="title" type="text" class="form-control" required name="title"
                                    value="{{ old('title') }}" autocomplete="caption" autofocus>
 
                             <label for="description" class="col-md-4 col-form-label">Description</label>

@@ -16,6 +16,7 @@
                         </div>
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label">Name</label>
+                            <input type="hidden" name="id" value="{{ $website->id  }}">
                             <input id="name" type="text" class="form-control" required name="name"
                                    value="{{ $website->name }}" autocomplete="caption" autofocus>
 
@@ -39,10 +40,11 @@
                             <input type="file" value="{{ $website->logo }}" class="form-control-file" id="logo" name="logo">
                         </div>
 
-                        <div class="row pt-4">
+                        <div class="row pt-4 d-flex justify-content-start">
                             <button class="btn btn-primary">
                                 Edit WebSite
                             </button>
+                            <a href="{{ route('site.delete', ['website' => $website->id]) }}" class="btn ml-2 btn-danger">Delete</a>
                         </div>
                     </div>
                 </div>

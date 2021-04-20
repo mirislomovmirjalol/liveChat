@@ -16,7 +16,7 @@ class ManageSitesController extends Controller
 
     public function index()
     {
-        $websites = WebsiteOperator::where("user_id", Auth::user()->id)->get();
+        $websites = WebsiteOperator::where("user_id", Auth::user()->id)->latest()->get();
 
 
         return view('website.manage_sites', ['websites' => $websites]);
@@ -33,7 +33,7 @@ class ManageSitesController extends Controller
             'name' => 'required|max:255',
             'url' => 'required',
             'title' => 'required',
-            'description' => '',
+            'description' => 'required',
             'welcome_text' => '',
             'logo' => 'image|max:5128',
         ]);
@@ -72,7 +72,7 @@ class ManageSitesController extends Controller
         }
     }
 
-    public function update(Request $request,UserWebsite $website)
+    public function update(Request $request)
     {
         $this->validate($request, [
             'name' => 'required|max:255',
@@ -83,19 +83,28 @@ class ManageSitesController extends Controller
             'logo' => 'image|max:5128',
         ]);
 
-        $website = UserWebsite::where('id',$request->id)->first();
+        $website = UserWebsite::where('id', $request->id)->first();
 
-        $website::update([
-            'user_id' => Auth::user()->id,
-            'name' => $request->name,
-            'url' => $request->url,
-            'title' => $request->title,
-            'description' => $request->description,
-            'welcome_text' => $request->welcome_text,
-            'logo' => $request->logo,
-            'token' => uniqid() . time() . rand(0, 1000),
-        ]);
+        $website->name = $request->name;
+        $website->url = $request->url;
+        $website->title = $request->title;
+        $website->description = $request->description;
+        $website->welcome_text = $request->welcome_text;
+        $website->logo = $request->logo;
 
-        return redirect('/manage_sites');
+        if ($website->save()) {
+            return redirect('manage_sites');
+        } else {
+            return redirect()->back();
+        }
+    }
+
+    public function delete(UserWebsite $website)
+    {
+        if ($website->delete()) {
+            return redirect('manage_sites');
+        } else {
+            return redirect('manage_sites');
+        }
     }
 }
