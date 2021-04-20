@@ -26,7 +26,7 @@
                                    value="{{ old('title') }}" autocomplete="caption" autofocus>
 
                             <label for="description" class="col-md-4 col-form-label">Description</label>
-                            <input id="description" type="text" class="form-control" name="description"
+                            <input id="description" type="text" class="form-control" required name="description"
                                    value="{{ old('description') }}" autocomplete="caption" autofocus>
 
                             <label for="welcome_text" class="col-md-4 col-form-label">Welcome text</label>

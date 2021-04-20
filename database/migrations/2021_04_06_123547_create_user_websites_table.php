@@ -15,6 +15,7 @@ class CreateUserWebsitesTable extends Migration
     {
         Schema::create('user_websites', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id');
             $table->string('name');
             $table->string('url');
             $table->string('token');
@@ -23,6 +24,11 @@ class CreateUserWebsitesTable extends Migration
             $table->text('description')->nullable();
             $table->text('welcome_text')->nullable();
             $table->timestamps();
+
+            $table->foreign('user_id')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 

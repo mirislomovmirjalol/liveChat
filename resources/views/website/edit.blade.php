@@ -4,7 +4,7 @@
 
     <section id="hero" class="d-flex min-vh-100 align-items-start">
         <div class="container bg-light py-4" data-aos="fade-up" data-aos-delay="100">
-            <form action="{{ route('manage_sites') }}" enctype="multipart/form-data" method="post">
+            <form action="{{ route('site.update') }}" enctype="multipart/form-data" method="post">
                 @csrf
                 @method('PATCH')
                 <div class="row">
