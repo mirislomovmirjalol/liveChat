@@ -107,4 +107,31 @@ class ManageSitesController extends Controller
             return redirect('manage_sites');
         }
     }
+
+    public function showAbout(UserWebsite $website)
+    {
+        if ($website->user_id == Auth::user()->id) {
+            return view('website.about', compact('website'));
+        } else {
+            return abort(404);
+        }
+    }
+
+    public function showOperators(UserWebsite $website)
+    {
+        if ($website->user_id == Auth::user()->id) {
+            return view('website.operators', compact('website'));
+        } else {
+            return abort(404);
+        }
+    }
+
+    public function showConversations(UserWebsite $website)
+    {
+        if ($website->user_id == Auth::user()->id) {
+            return view('website.Conversations', compact('website'));
+        } else {
+            return abort(404);
+        }
+    }
 }

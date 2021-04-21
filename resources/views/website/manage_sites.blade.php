@@ -29,8 +29,11 @@
                         <div data-aos="zoom-in"
                              data-aos-delay="200">
                             <div class="card-body icon-box">
-                                <h5 class="card-title">{{ $website->website->name }}</h5>
-                                <h6 class="card-subtitle mb-2 text-muted"><a href="#">{{ $website->website->url }}</a></h6>
+                                <a href="{{ route('site.about', $website->website) }}">
+                                    <h5 class="card-title">{{ $website->website->name }}</h5>
+                                </a>
+                                <h6 class="card-subtitle mb-2 text-muted"><a href="#">{{ $website->website->url }}</a>
+                                </h6>
                                 <p class="card-text">{{ $website->website->description }}</p>
                                 <div class="d-flex justify-content-end">
                                     <a href="{{ route('site.edit', $website->website) }}" class="card-link">Edit</a>
