@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ManageSitesController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -22,14 +23,18 @@ Auth::routes();
 
 
 Route::middleware('auth')->group(function () {
-    Route::get('/manage_sites', [App\Http\Controllers\ManageSitesController::class, 'index'])->name('manage_sites');
-    Route::get('/manage_sites/create', [App\Http\Controllers\ManageSitesController::class, 'create'])->name('site.create');
-    Route::post('/manage_sites', [App\Http\Controllers\ManageSitesController::class, 'store']);
-    Route::get('/manage_sites/site/edit/{website}', [App\Http\Controllers\ManageSitesController::class, 'edit'])->name('site.edit');
-    Route::get('/manage_sites/site/delete/{website}', [App\Http\Controllers\ManageSitesController::class, 'delete'])->name('site.delete');
-    Route::patch('/manage_sites', [App\Http\Controllers\ManageSitesController::class, 'update'])->name('site.update');
+    Route::prefix('websites')->group(function () {
+        Route::get('/', [ManageSitesController::class, 'index'])->name('manage_sites');
+        Route::post('/', [ManageSitesController::class, 'store']);
+        Route::patch('/', [ManageSitesController::class, 'update'])->name('site.update');
+        Route::get('create', [ManageSitesController::class, 'create'])->name('site.create');
+        Route::get('{website}/edit', [ManageSitesController::class, 'edit'])->name('site.edit');
+        Route::get('{website}/delete', [ManageSitesController::class, 'delete'])->name('site.delete');
+        Route::get('{website}/about', [ManageSitesController::class, 'showAbout'])->name('site.about');
+        Route::get('/{website}/operators', [ManageSitesController::class, 'showOperators'])->name('site.operators');
+        Route::get('/{website}/conversations/', [ManageSitesController::class, 'showConversations'])->name('site.conversations');
+    });
 
-    Route::get('/manage_sites/site/about/{website}', [App\Http\Controllers\ManageSitesController::class, 'showAbout'])->name('site.about');
-    Route::get('/manage_sites/site/operators/{website}', [App\Http\Controllers\ManageSitesController::class, 'showOperators'])->name('site.operators');
-    Route::get('/manage_sites/site/conversations/{website}', [App\Http\Controllers\ManageSitesController::class, 'showConversations'])->name('site.conversations');
+    Route::get('/operators/create', [ManageSitesController::class, 'showOperator'])->name('site.showOperator');
+    Route::post('/operators/create', [ManageSitesController::class, 'createOperator'])->name('site.createOperator');
 });

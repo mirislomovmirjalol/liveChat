@@ -30,6 +30,11 @@
     <!-- Template Main CSS File -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
+    <style>
+        .fixedBottom{
+            flex-shrink: 0;
+        }
+    </style>
 </head>
 
 <body>
@@ -101,7 +106,7 @@
 
 
 <!-- ======= Footer ======= -->
-<footer id="footer">
+<footer id="footer" class="fixedBottom">
 
     <div class="container d-md-flex py-4">
 

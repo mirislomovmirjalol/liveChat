@@ -2,10 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\UserWebsite;
 use App\Models\WebsiteOperator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class ManageSitesController extends Controller
 {
@@ -119,8 +121,10 @@ class ManageSitesController extends Controller
 
     public function showOperators(UserWebsite $website)
     {
+        $websiteOperators = WebsiteOperator::where('website_id',$website->id)->latest()->get();
+
         if ($website->user_id == Auth::user()->id) {
-            return view('website.operators', compact('website'));
+            return view('website.operators', compact('website', 'websiteOperators'));
         } else {
             return abort(404);
         }
@@ -133,5 +137,40 @@ class ManageSitesController extends Controller
         } else {
             return abort(404);
         }
+    }
+
+    public function showOperator(Request $request)
+    {
+        return view('website.create_operator');
+    }
+
+    public function createOperator(Request $request)
+    {
+        $this->validate($request, [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+        ]);
+
+        $operator = new User();
+
+        $operator->name = $request->name;
+        $operator->email = $request->email;
+        $operator->password = bcrypt($request->password);
+        $operator->created_by = auth()->user()->id;
+        $operator->type = User::TYPE_OPERATOR;
+
+        $operator->save();
+
+        $websiteOperator = new WebsiteOperator();
+
+        $operator = User::where("email", $request->email)->first();
+
+        $websiteOperator->user_id = $operator->id;
+        $websiteOperator->website_id = $request->id;
+
+        $websiteOperator->save();
+
+        return redirect()->route('site.operators',$request->id);
     }
 }

@@ -20,11 +20,18 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
+            $table->tinyInteger('status')->default(\App\Models\User::active);
+            $table->unsignedBigInteger('created_by')->nullable();
 
-            $table->tinyInteger('type')->default(0);
+            $table->tinyInteger('type')->default(\App\Models\User::TYPE_USER);
             $table->bigInteger('telegram_id')->nullable();
 
             $table->timestamps();
+
+            $table->foreign('created_by')
+                ->references('id')
+                ->on('users')
+                ->onDelete('cascade');
         });
     }
 
