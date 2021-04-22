@@ -26,12 +26,13 @@
     <link href="{{ asset('vendor/venobox/venobox.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/owl.carousel/assets/owl.carousel.min.css') }}" rel="stylesheet">
     <link href="{{ asset('vendor/aos/aos.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
 
     <!-- Template Main CSS File -->
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
 
     <style>
-        .fixedBottom{
+        .fixedBottom {
             bottom: 0;
             right: 0;
             left: 0;
@@ -67,6 +68,11 @@
                         </li>
                     @endif
                 @else
+                    <li>
+                        <a href="{{ route('manage_sites') }}">
+                            Websites
+                        </a>
+                    </li>
                     <li class="drop-down"><a href="#">
                             {{ Auth::user()->name }}
                         </a>
@@ -84,11 +90,6 @@
                                     @csrf
                                 </form>
 
-                            </li>
-                            <li>
-                                <a href="{{ route('manage_sites') }}">
-                                    Manage sites
-                                </a>
                             </li>
                         </ul>
                     </li>
@@ -111,17 +112,20 @@
                 <div class="sidebar-sticky">
                     <ul class="nav flex-column">
                         <li class="nav-item">
-                            <a class="nav-link text-primary {{ request()->route()->getName() == 'site.about' ? 'font-weight-bold' : '' }}" href="{{ route('site.about', $website->id) }}">
+                            <a class="nav-link text-primary {{ request()->route()->getName() == 'site.about' ? 'font-weight-bold' : '' }}"
+                               href="{{ route('site.about', $website->id) }}">
                                 About
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-primary {{ request()->route()->getName() == 'site.operators' ? 'font-weight-bold' : '' }}" href="{{ route('site.operators', $website->id) }}">
+                            <a class="nav-link text-primary {{ request()->route()->getName() == 'site.operators' ? 'font-weight-bold' : '' }}"
+                               href="{{ route('site.operators', $website->id) }}">
                                 Operators
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-primary {{ request()->route()->getName() == 'site.conversations' ? 'font-weight-bold' : '' }}" href="{{ route('site.conversations', $website->id) }}">
+                            <a class="nav-link text-primary {{ request()->route()->getName() == 'site.conversations' ? 'font-weight-bold' : '' }}"
+                               href="{{ route('site.conversations', $website->id) }}">
                                 Conversations
                             </a>
                         </li>

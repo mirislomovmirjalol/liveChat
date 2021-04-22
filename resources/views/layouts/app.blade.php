@@ -63,6 +63,11 @@
                         </li>
                     @endif
                 @else
+                    <li>
+                        <a href="{{ route('manage_sites') }}">
+                            Websites
+                        </a>
+                    </li>
                     <li class="drop-down"><a href="#">
                             {{ Auth::user()->name }}
                         </a>
@@ -80,11 +85,6 @@
                                     @csrf
                                 </form>
 
-                            </li>
-                            <li>
-                                <a href="{{ route('manage_sites') }}">
-                                    Manage sites
-                                </a>
                             </li>
                         </ul>
                     </li>

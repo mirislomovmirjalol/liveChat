@@ -14,9 +14,10 @@ class CreateWebsiteOperatorsTable extends Migration
     public function up()
     {
         Schema::create('website_operators', function (Blueprint $table) {
+            $table->id();
             $table->unsignedBigInteger('website_id');
             $table->unsignedBigInteger('user_id');
-            $table->tinyInteger('status');
+            $table->tinyInteger('status')->default(\App\Models\WebsiteOperator::STATUS_ACTIVE);
 
 //            $table->enum('status', ['active', 'disabled']);
 

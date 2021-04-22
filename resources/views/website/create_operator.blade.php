@@ -12,6 +12,17 @@
                                 Add New Operator
                             </h3>
                         </div>
+
+                        @if ($errors->any())
+                            <div class="alert alert-danger">
+                                <ul>
+                                    @foreach ($errors->all() as $error)
+                                        <li>{{ $error }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endif
+
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label">Name</label>
                             <input id="name" type="text" class="form-control" required name="name"
@@ -28,6 +39,11 @@
                             <label for="password-confirm" class="col-md-4 col-form-label">Password Confirm</label>
                             <input id="password-confirm" type="password" class="form-control"
                                    name="password_confirmation" required autocomplete="new-password">
+                            @isset($website)
+                                <label for="website" class="col-md-4 col-form-label">Website</label>
+                                <input id="website" type="password" class="form-control" disabled placeholder="{{ $website->name }}">
+                                <input type="hidden" name="website_id" value="{{ $website->id }}">
+                            @endisset
                         </div>
 
                         <div class="row pt-4">

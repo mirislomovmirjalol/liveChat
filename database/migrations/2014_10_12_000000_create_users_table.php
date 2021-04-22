@@ -20,7 +20,7 @@ class CreateUsersTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->rememberToken();
-            $table->tinyInteger('status')->default(\App\Models\User::active);
+            $table->tinyInteger('status')->default(\App\Models\User::STATUS_ACTIVE);
             $table->unsignedBigInteger('created_by')->nullable();
 
             $table->tinyInteger('type')->default(\App\Models\User::TYPE_USER);

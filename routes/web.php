@@ -32,6 +32,10 @@ Route::middleware('auth')->group(function () {
         Route::get('{website}/delete', [ManageSitesController::class, 'delete'])->name('site.delete');
         Route::get('{website}/about', [ManageSitesController::class, 'showAbout'])->name('site.about');
         Route::get('/{website}/operators', [ManageSitesController::class, 'showOperators'])->name('site.operators');
+        Route::get('/{website}/operators/attach', [ManageSitesController::class, 'attachOperators'])->name('site.operators.attach');
+        Route::post('/{website}/operators/attach', [ManageSitesController::class, 'attachedOperators'])->name('site.operators.attached');
+        Route::get('/{website}/operators/delete/{operator}', [ManageSitesController::class, 'deleteOperator'])->name('site.operators.delete');
+        Route::get('/{website}/operators/toggle/{operator}', [ManageSitesController::class, 'toggleStatus'])->name('site.operators.toggle');
         Route::get('/{website}/conversations/', [ManageSitesController::class, 'showConversations'])->name('site.conversations');
     });
 

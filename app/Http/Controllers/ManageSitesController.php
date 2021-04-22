@@ -7,7 +7,6 @@ use App\Models\UserWebsite;
 use App\Models\WebsiteOperator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class ManageSitesController extends Controller
 {
@@ -62,7 +61,7 @@ class ManageSitesController extends Controller
 
         $websiteoperator->save();
 
-        return redirect('/manage_sites');
+        return redirect()->route('manage_sites');
     }
 
     public function edit(UserWebsite $website)
@@ -103,10 +102,14 @@ class ManageSitesController extends Controller
 
     public function delete(UserWebsite $website)
     {
-        if ($website->delete()) {
-            return redirect('manage_sites');
+        if ($website->user_id == Auth::user()->id) {
+            if ($website->delete()) {
+                return redirect('manage_sites');
+            } else {
+                return redirect('manage_sites');
+            }
         } else {
-            return redirect('manage_sites');
+            return abort(404);
         }
     }
 
@@ -121,10 +124,11 @@ class ManageSitesController extends Controller
 
     public function showOperators(UserWebsite $website)
     {
-        $websiteOperators = WebsiteOperator::where('website_id',$website->id)->latest()->get();
+        $websiteOperators = WebsiteOperator::where('website_id', $website->id)->latest()->get();
+        $attach = User::where('created_by', Auth::user()->id)->first();
 
         if ($website->user_id == Auth::user()->id) {
-            return view('website.operators', compact('website', 'websiteOperators'));
+            return view('website.operators', compact('website', 'websiteOperators', 'attach'));
         } else {
             return abort(404);
         }
@@ -141,6 +145,12 @@ class ManageSitesController extends Controller
 
     public function showOperator(Request $request)
     {
+        if ($request->get('website')) {
+            $website = UserWebsite::query()->where('id', (int)$request->get('website'))->where('user_id', Auth::user()->id)->first();
+            if ($website) {
+                return view('website.create_operator', compact('website'));
+            }
+        }
         return view('website.create_operator');
     }
 
@@ -153,7 +163,6 @@ class ManageSitesController extends Controller
         ]);
 
         $operator = new User();
-
         $operator->name = $request->name;
         $operator->email = $request->email;
         $operator->password = bcrypt($request->password);
@@ -162,15 +171,78 @@ class ManageSitesController extends Controller
 
         $operator->save();
 
+        if ($request->get('website_id')) {
+            $website = WebsiteOperator::where('website_id', $request->get('website_id'))->where('user_id', Auth::user()->id)->first();
+            if ($website) {
+                $websiteOperator = new WebsiteOperator();
+                $websiteOperator->user_id = $operator->id;
+                $websiteOperator->status = WebsiteOperator::STATUS_ACTIVE;
+                $websiteOperator->website_id = $request->get('website_id');
+                $websiteOperator->save();
+                return redirect()->route('site.operators', $request->get('website_id'));
+            }
+        }
+
+        return abort(404);
+    }
+
+    public function attachOperators(UserWebsite $website)
+    {
+        $websiteOperators = User::where('created_by', auth()->user()->id)
+            ->whereNotIn('id', function ($query) use ($website) {
+                $query->select('user_id')->where('website_id', $website->id)->from('website_operators');
+            })
+            ->get();
+
+
+        if ($website->user_id == Auth::user()->id) {
+            return view('website.attach_operators', compact('website', 'websiteOperators'));
+        } else {
+            return abort(404);
+        }
+    }
+
+    public function attachedOperators(Request $request, UserWebsite $website)
+    {
+        $this->validate($request, [
+            'operator' => ['required', 'unique:user_id'],
+        ]);
+
         $websiteOperator = new WebsiteOperator();
-
-        $operator = User::where("email", $request->email)->first();
-
-        $websiteOperator->user_id = $operator->id;
-        $websiteOperator->website_id = $request->id;
-
+        $websiteOperator->website_id = $website->id;
+        $websiteOperator->user_id = $request->operator;
         $websiteOperator->save();
+        return redirect()->route('site.operators', $website->id);
+    }
 
-        return redirect()->route('site.operators',$request->id);
+    public function deleteOperator(UserWebsite $website, User $operator)
+    {
+        if ($website->user_id == Auth::user()->id) {
+            if (WebsiteOperator::query()->where('user_id', $operator->id)->where('website_id', $website->id)->delete()) {
+                return redirect()->route('site.operators', $website);
+            } else {
+                return abort(404);
+            }
+        } else {
+            return abort(404);
+        }
+    }
+
+    public function toggleStatus(UserWebsite $website, User $operator)
+    {
+        if ($website->user_id == Auth::user()->id) {
+            $toggle = WebsiteOperator::where('user_id', $operator->id)->where('website_id', $website->id)->first();
+            if ($toggle->status == User::STATUS_ACTIVE) {
+                $toggle->status = User::STATUS_INACTIVE;
+                $toggle->save();
+                return redirect()->route('site.operators', $website);
+            } else {
+                $toggle->status = User::STATUS_ACTIVE;
+                $toggle->save();
+                return redirect()->route('site.operators', $website);
+            }
+        } else {
+            return abort(404);
+        }
     }
 }
