@@ -7,6 +7,7 @@ use App\Models\UserWebsite;
 use App\Models\WebsiteOperator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Validation\Rule;
 
 class ManageSitesController extends Controller
 {
@@ -205,7 +206,7 @@ class ManageSitesController extends Controller
     public function attachedOperators(Request $request, UserWebsite $website)
     {
         $this->validate($request, [
-            'operator' => ['required', 'unique:user_id'],
+            'operator' => ['required', "unique:website_operators,user_id,{$request->operator}"],
         ]);
 
         $websiteOperator = new WebsiteOperator();
@@ -228,21 +229,25 @@ class ManageSitesController extends Controller
         }
     }
 
-    public function toggleStatus(UserWebsite $website, User $operator)
+    public function toggleStatus(Request $request, UserWebsite $website, User $operator)
     {
         if ($website->user_id == Auth::user()->id) {
-            $toggle = WebsiteOperator::where('user_id', $operator->id)->where('website_id', $website->id)->first();
-            if ($toggle->status == User::STATUS_ACTIVE) {
-                $toggle->status = User::STATUS_INACTIVE;
-                $toggle->save();
-                return redirect()->route('site.operators', $website);
-            } else {
-                $toggle->status = User::STATUS_ACTIVE;
-                $toggle->save();
-                return redirect()->route('site.operators', $website);
+            $toggle = WebsiteOperator::where('user_id', $operator->id)
+                ->where('website_id', $website->id)
+                ->first();
+
+            if($toggle){
+                if ($toggle->status == User::STATUS_ACTIVE) {
+                    $toggle->status = User::STATUS_INACTIVE;
+                    $toggle->save();
+                    return redirect()->route('site.operators', $website);
+                } else {
+                    $toggle->status = User::STATUS_ACTIVE;
+                    $toggle->save();
+                    return redirect()->route('site.operators', $website);
+                }
             }
-        } else {
-            return abort(404);
         }
+        return abort(404);
     }
 }
