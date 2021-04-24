@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\ChatController;
 use App\Http\Controllers\ManageSitesController;
+use App\Models\Conversation;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -37,8 +39,12 @@ Route::middleware('auth')->group(function () {
         Route::get('/{website}/operators/delete/{operator}', [ManageSitesController::class, 'deleteOperator'])->name('site.operators.delete');
         Route::get('/{website}/operators/toggle/{operator}', [ManageSitesController::class, 'toggleStatus'])->name('site.operators.toggle');
         Route::get('/{website}/conversations/', [ManageSitesController::class, 'showConversations'])->name('site.conversations');
+        Route::get('/{website}/conversations/{conversation}', [ChatController::class, 'admin'])->name('admin.chat');
+        Route::post('/{website}/conversations/{conversation}', [ChatController::class, 'answer'])->name('admin.write');
     });
 
     Route::get('/operators/create', [ManageSitesController::class, 'showOperator'])->name('site.showOperator');
     Route::post('/operators/create', [ManageSitesController::class, 'createOperator'])->name('site.createOperator');
 });
+Route::get('/chat', [ChatController::class, 'index'])->name('chat');
+Route::post('/chat', [ChatController::class, 'write'])->name('write');

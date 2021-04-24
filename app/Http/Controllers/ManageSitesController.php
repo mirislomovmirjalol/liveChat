@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Conversation;
 use App\Models\User;
 use App\Models\UserWebsite;
 use App\Models\WebsiteOperator;
@@ -20,8 +21,7 @@ class ManageSitesController extends Controller
     {
         $websites = WebsiteOperator::where("user_id", Auth::user()->id)->latest()->get();
 
-
-        return view('website.manage_sites', ['websites' => $websites]);
+        return view('website.manage_sites', compact('websites'));
     }
 
     public function create()
@@ -138,7 +138,8 @@ class ManageSitesController extends Controller
     public function showConversations(UserWebsite $website)
     {
         if ($website->user_id == Auth::user()->id) {
-            return view('website.Conversations', compact('website'));
+            $conversations = Conversation::where('website_id', $website->id)->latest()->get();
+            return view('website.Conversations', compact('website','conversations'));
         } else {
             return abort(404);
         }
@@ -206,7 +207,11 @@ class ManageSitesController extends Controller
     public function attachedOperators(Request $request, UserWebsite $website)
     {
         $this->validate($request, [
-            'operator' => ['required', "unique:website_operators,user_id,{$request->operator}"],
+            'operator' => ['required',
+                Rule::unique("website_operators", 'user_id')
+                    ->where(function ($query) use ($website) {
+                        return $query->where('website_id', $website->id);
+                    })],
         ]);
 
         $websiteOperator = new WebsiteOperator();
@@ -218,6 +223,9 @@ class ManageSitesController extends Controller
 
     public function deleteOperator(UserWebsite $website, User $operator)
     {
+        if ($operator->id == Auth::user()->id) {
+            return abort(404);
+        }
         if ($website->user_id == Auth::user()->id) {
             if (WebsiteOperator::query()->where('user_id', $operator->id)->where('website_id', $website->id)->delete()) {
                 return redirect()->route('site.operators', $website);
@@ -236,7 +244,7 @@ class ManageSitesController extends Controller
                 ->where('website_id', $website->id)
                 ->first();
 
-            if($toggle){
+            if ($toggle) {
                 if ($toggle->status == User::STATUS_ACTIVE) {
                     $toggle->status = User::STATUS_INACTIVE;
                     $toggle->save();

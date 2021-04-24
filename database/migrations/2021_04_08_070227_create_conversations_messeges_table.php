@@ -13,12 +13,12 @@ class CreateConversationsMessegesTable extends Migration
      */
     public function up()
     {
-        Schema::create('conversations_messeges', function (Blueprint $table) {
+        Schema::create('conversations_messages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('conversations_id');
-            $table->text('messege');
+            $table->text('message');
             $table->unsignedBigInteger('operator_id')->nullable();
-            $table->enum('type', ['in', 'out']);
+            $table->tinyInteger('type');
             $table->timestamps();
 
             $table->foreign('conversations_id')

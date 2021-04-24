@@ -8,4 +8,9 @@ use Illuminate\Database\Eloquent\Model;
 class Conversation extends Model
 {
     use HasFactory;
+
+    public function operator()
+    {
+        return $this->belongsTo('App\Models\WebsiteOperator', 'operator_id');
+    }
 }
