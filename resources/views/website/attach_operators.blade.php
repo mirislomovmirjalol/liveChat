@@ -26,6 +26,7 @@
                     </select>
                 </div>
                 <div class="pt-4 d-flex justify-content-end">
+                    <a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
                     <button class="btn btn-primary">
                         Attach
                     </button>

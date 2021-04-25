@@ -139,7 +139,7 @@ class ManageSitesController extends Controller
     {
         if ($website->user_id == Auth::user()->id) {
             $conversations = Conversation::where('website_id', $website->id)->latest()->get();
-            return view('website.Conversations', compact('website','conversations'));
+            return view('website.conversations', compact('website','conversations'));
         } else {
             return abort(404);
         }

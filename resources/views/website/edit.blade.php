@@ -45,6 +45,7 @@
                                 Edit WebSite
                             </button>
                             <a href="{{ route('site.delete', ['website' => $website->id]) }}" class="btn ml-2 btn-danger">Delete</a>
+                            <a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
                         </div>
                     </div>
                 </div>

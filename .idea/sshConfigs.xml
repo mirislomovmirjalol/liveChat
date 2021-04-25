@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="OPEN_SSH" host="45.156.23.229" id="ee322b4a-a8f0-4f6f-85a6-02ba8ca3694d" port="22" nameFormat="DESCRIPTIVE" username="livechat" />
+    </configs>
+  </component>
+</project>

@@ -22,7 +22,7 @@
                                 </ul>
                             </div>
                         @endif
-                        
+
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label">Name</label>
                             <input id="name" type="text" class="form-control" required name="name"
@@ -52,6 +52,7 @@
                             <button class="btn btn-primary">
                                 Add New WebSite
                             </button>
+                            <a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
                         </div>
                     </div>
                 </div>

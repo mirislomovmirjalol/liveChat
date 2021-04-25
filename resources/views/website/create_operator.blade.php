@@ -50,6 +50,7 @@
                             <button class="btn btn-primary">
                                 Add New Operator
                             </button>
+                            <a href="{{ URL::previous() }}" class="btn btn-default">Back</a>
                         </div>
                     </div>
                 </div>
