@@ -48,3 +48,4 @@ Route::middleware('auth')->group(function () {
 });
 Route::get('/chat', [ChatController::class, 'index'])->name('chat');
 Route::post('/chat', [ChatController::class, 'write'])->name('write');
+Route::get('/test',[ChatController::class,'test']);

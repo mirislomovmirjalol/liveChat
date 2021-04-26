@@ -48,10 +48,33 @@
                         {{ $websiteOperator->user->email }}
                     </td>
                     <td>
-                        <a href="{{ route('site.operators.delete', [$website->id, $websiteOperator->user->id]) }}" class="text-danger"><i
-                                class="bi bi-trash"></i></a>
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal{{ $websiteOperator->user->id }}" tabindex="-1" role="dialog"
+                             aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Your Token</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3">https://t.me/livechatappbot?start={{ $websiteOperator->user->telegram_start_token }}
+                                            </textarea>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <a href="#" class="text-dark" data-toggle="modal" data-target="#exampleModal{{ $websiteOperator->user->id }}"><i
+                                class="bi bi-eye-fill"></i></a>
                         <a href="{{ route('site.operators.toggle', [$website->id, $websiteOperator->user->id]) }}" class="text-dark"><i
                                 class="bi bi-toggle2-{{ 1 == $websiteOperator->status ? 'on' : 'off' }}"></i></a>
+                        <a href="{{ route('site.operators.delete', [$website->id, $websiteOperator->user->id]) }}" class="text-danger"><i
+                                class="bi bi-trash"></i></a>
                     </td>
                 </tr>
             @endforeach

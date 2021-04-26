@@ -6,8 +6,10 @@ use App\Models\Conversation;
 use App\Models\User;
 use App\Models\UserWebsite;
 use App\Models\WebsiteOperator;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 
 class ManageSitesController extends Controller
@@ -170,6 +172,7 @@ class ManageSitesController extends Controller
         $operator->password = bcrypt($request->password);
         $operator->created_by = auth()->user()->id;
         $operator->type = User::TYPE_OPERATOR;
+        $operator->telegram_start_token = Carbon::now()->timestamp . '.' .Str::random(30);
 
         $operator->save();
 

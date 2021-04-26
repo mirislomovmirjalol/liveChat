@@ -19,8 +19,6 @@ class CreateWebsiteOperatorsTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->tinyInteger('status')->default(\App\Models\WebsiteOperator::STATUS_ACTIVE);
 
-//            $table->enum('status', ['active', 'disabled']);
-
             $table->foreign('website_id')
                 ->references('id')
                 ->on('user_websites')

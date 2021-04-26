@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Conversation;
 use App\Models\Conversations_message;
 use App\Models\UserWebsite;
+use App\Models\WebsiteOperator;
+use App\TelegramBot;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Str;
@@ -43,6 +45,9 @@ class ChatController extends Controller
         ]);
 
         $conversation = Conversation::query()->where('client_ip', $request->ip())->first();
+
+        $bot = new TelegramBot('1729789410:AAGpdBnlMZGAPEl5CiWwzE-xYAyd0KQVsEo');
+        $bot->sendMessage(304268665, $request->message);
 
         if ($conversation) {
             $message = new Conversations_message();
@@ -146,5 +151,11 @@ class ChatController extends Controller
             }
         }
         return abort(404);
+    }
+
+    public function test()
+    {
+        $bot = new TelegramBot('1729789410:AAGpdBnlMZGAPEl5CiWwzE-xYAyd0KQVsEo');
+        return $bot->sendMessage(304268665, 'Hello My Lazy Developer');
     }
 }

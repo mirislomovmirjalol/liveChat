@@ -1,5 +1,6 @@
 <?php
 
+use App\TelegramBot;
 use Illuminate\Foundation\Inspiring;
 use Illuminate\Support\Facades\Artisan;
 
@@ -17,3 +18,14 @@ use Illuminate\Support\Facades\Artisan;
 Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
+
+Artisan::command('tbot', function () {
+    $bot = resolve(\App\TelegramBot::class);
+    $bot->hears('salom', function ($bot) {
+        $bot->reply('alik');
+    });
+    $bot->hears('xayr', function ($bot) {
+        $bot->reply('Xayr, kep turing!');
+    });
+    $bot->listen();
+})->purpose('Handle Telegram bot updates');

@@ -10,10 +10,7 @@
 <body>
 <div class="chat-box">
     <div class="header">
-        <div class="avatar-wrapper avatar-big">
-            <img src="https://znews-photo.zadn.vn/w660/Uploaded/pnbcuhbatgunb/2020_03_23/i13863960814_1.jpg" alt="avatar"/>
-        </div>
-        <span class="name">Crush</span>
+        <span class="name">LiveChat</span>
         <span class="options">
       <i class="fas fa-ellipsis-h"></i>
     </span>
