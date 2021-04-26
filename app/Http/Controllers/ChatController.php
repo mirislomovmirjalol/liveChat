@@ -86,8 +86,8 @@ class ChatController extends Controller
                 return view('website.conversation_messages', compact('messages', 'website', 'conversation'));
             } else {
                 $conversation = new Conversation();
-                $conversation->website_id = 1;
-                $conversation->operator_id = 1;
+                $conversation->website_id = $website->id;
+                $conversation->operator_id = auth()->user()->id;
                 $conversation->operator_expire_at = date("Y-m-d H:i:s", time());
                 $conversation->client_id = Str::uuid();
                 $conversation->client_ip = $request->ip();
@@ -127,7 +127,7 @@ class ChatController extends Controller
         } else {
             $conversation = new Conversation();
             $conversation->website_id = $request->website_id;
-            $conversation->operator_id = 1;
+            $conversation->operator_id = auth()->user()->id;
             $conversation->operator_expire_at = date("Y-m-d H:i:s", time());
             $conversation->client_id = Str::uuid();
             $conversation->client_ip = $request->ip();

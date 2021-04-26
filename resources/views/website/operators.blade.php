@@ -48,8 +48,10 @@
                         {{ $websiteOperator->user->email }}
                     </td>
                     <td>
-                        <a href="{{ route('site.operators.delete', [$website->id, $websiteOperator->user->id]) }}" class="text-danger"><i class="bi bi-trash"></i></a>
-                        <a href="{{ route('site.operators.toggle', [$website->id, $websiteOperator->user->id]) }}" class="text-dark"><i class="bi bi-toggle2-{{ 1 == $websiteOperator->status ? 'on' : 'off' }}"></i></a>
+                        <a href="{{ route('site.operators.delete', [$website->id, $websiteOperator->user->id]) }}" class="text-danger"><i
+                                class="bi bi-trash"></i></a>
+                        <a href="{{ route('site.operators.toggle', [$website->id, $websiteOperator->user->id]) }}" class="text-dark"><i
+                                class="bi bi-toggle2-{{ 1 == $websiteOperator->status ? 'on' : 'off' }}"></i></a>
                     </td>
                 </tr>
             @endforeach
