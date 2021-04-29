@@ -19,13 +19,8 @@ Artisan::command('inspire', function () {
     $this->comment(Inspiring::quote());
 })->purpose('Display an inspiring quote');
 
-Artisan::command('tbot', function () {
-    $bot = resolve(\App\TelegramBot::class);
-    $bot->hears('salom', function ($bot) {
-        $bot->reply('alik');
-    });
-    $bot->hears('xayr', function ($bot) {
-        $bot->reply('Xayr, kep turing!');
-    });
+Artisan::command('tbot', function (TelegramBot $bot) {
+    $bot->hears('salom', fn($bot) => $bot->reply('alik!'));
+    $bot->hears('xayr', fn($bot) => $bot->reply('Xayr, kep turing!'));
     $bot->listen();
 })->purpose('Handle Telegram bot updates');

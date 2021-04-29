@@ -3,6 +3,8 @@
 
 namespace App;
 
+use App\Models\Conversation;
+use App\Models\Conversations_message;
 use Http;
 
 class TelegramBot
@@ -26,15 +28,31 @@ class TelegramBot
                 $from = $update['message']['from']['id'] ?? 0;
                 if ($from !== 0) {
                     $message = $update['message']['text'] ?? '';
+
                     if(isset($this->replies[$message])) {
                         $ins = $this;
                         $ins->sender_id = $from;
                         call_user_func($this->replies[$message], $ins);
+
                     } else {
+                        $store = new Conversations_message();
+
+                        $store->conversations_id = 1;
+
+                        $store->message = $message;
+
+                        $store->type = Conversations_message::TYPE_IN;
+
+                        $store->save();
+                        die();
+
                         $this->sendMessage($from, 'Sizni tushunmadim.');
                     }
                 }
+
             }
+
+
         }
     }
 
